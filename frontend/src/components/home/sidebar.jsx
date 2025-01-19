@@ -3,8 +3,11 @@ import { CgNotes } from "react-icons/cg";
 import { MdLabelImportantOutline, MdIncompleteCircle } from "react-icons/md";
 import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../store/auth";
 
 const Sidebar = () => {
+  const dispatch = useDispatch()
   const data = [
     {
       title: "All Tasks",
@@ -27,7 +30,11 @@ const Sidebar = () => {
       link: "/incompletedtasks",
     },
   ];
-
+const logout = () =>{
+dispatch(authActions.logout())
+localStorage.clear("id")
+localStorage.clear("token")
+}
   return (
     <>
       <div>
@@ -47,7 +54,7 @@ const Sidebar = () => {
         ))}
       </div>
       <div className="mt-4">
-        <button className="bg-gray-600 w-full p-2 rounded">Log out</button>
+        <button className="bg-gray-600 w-full p-2 rounded" onClick={logout}>Log out</button>
       </div>
     </>
   );
